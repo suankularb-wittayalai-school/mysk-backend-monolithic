@@ -25,10 +25,6 @@ class ContactTestCase(TestCase):
         contact = Contact.objects.get(name="Phone")
         self.assertEqual(str(contact), "Phone")
 
-    def test_contact_repr(self):
-        contact = Contact.objects.get(name="Phone")
-        self.assertEqual(repr(contact), "Phone")
-
     def test_update_contact(self):
         contact = Contact.objects.get(name="Phone")
         contact.value = "0987654321"
