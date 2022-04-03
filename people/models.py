@@ -57,3 +57,17 @@ class Student(models.Model):
         Person, on_delete=models.CASCADE, related_name="student"
     )
     student_id = models.CharField(max_length=5)
+
+    def __str__(self):
+        return f"{self.student_id}: {self.person.prefix_en} {self.person.first_name_en} {self.person.last_name_en}"
+
+
+class Teacher(models.Model):
+    person = models.OneToOneField(
+        Person, on_delete=models.CASCADE, related_name="teacher"
+    )
+    teacher_id = models.CharField(max_length=5)
+    # subject_group = models.ManyToManyField("SubjectGroup", blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.teacher_id}: {self.person.prefix_en} {self.person.first_name_en} {self.person.last_name_en}"
