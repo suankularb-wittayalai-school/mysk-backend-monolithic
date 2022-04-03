@@ -106,3 +106,47 @@ class PersonTestCase(TestCase):
         person.delete()
         self.assertEqual(Person.objects.count(), 0)
         self.assertEqual(Contact.objects.count(), 1)
+
+
+class StudentTestCase(TestCase):
+    def setUp(self):
+        Student.objects.create(
+            student_id="1234567890123",
+            person=Person.objects.create(
+                prefix_en="Mr.",
+                prefix_th="นาย",
+                first_name_th="สมชาย",
+                last_name_th="สมบัติ",
+                first_name_en="Somchai",
+                last_name_en="Sombut",
+                birthdate="2000-01-01",
+                citizen_id="1234567890123",
+            ),
+        )
+
+    def test_student_id(self):
+        student = Student.objects.get(student_id="1234567890123")
+        self.assertEqual(student.student_id, "1234567890123")
+
+    def test_student_person(self):
+        student = Student.objects.get(student_id="1234567890123")
+        self.assertEqual(student.person.first_name_en, "Somchai")
+
+    def test_student_str(self):
+        student = Student.objects.get(student_id="1234567890123")
+        self.assertEqual(str(student), "1234567890123: Mr. Somchai Sombut")
+
+    def test_student_update(self):
+        student = Student.objects.get(student_id="1234567890123")
+        student.student_id = "1234567890124"
+        student.save()
+        self.assertEqual(student.student_id, "1234567890124")
+
+    def test_student_delete(self):
+        student = Student.objects.get(student_id="1234567890123")
+        student.delete()
+        self.assertEqual(Student.objects.count(), 0)
+
+    def test_student_delete_with_person(self):
+        student = Student.objects.get(student_id="1234567890123")
+        student.person.delete()
