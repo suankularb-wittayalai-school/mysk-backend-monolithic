@@ -80,7 +80,8 @@ class PersonTestCase(TestCase):
 
     def test_person_add_contact(self):
         person = Person.objects.get(first_name_en="Somchai")
-        person.contacts.add("Phone", "P", "0912345678")
+        contact = Contact.objects.create(name="Phone", type="P", value="0912345678")
+        person.contacts.add(contact)
         self.assertEqual(person.contacts.count(), 1)
 
     def test_person_str(self):
@@ -100,7 +101,8 @@ class PersonTestCase(TestCase):
 
     def test_person_delete_with_contact(self):
         person = Person.objects.get(first_name_en="Somchai")
-        person.add_contact("Phone", "P", "0912345678")
+        contact = Contact.objects.create(name="Phone", type="P", value="0912345678")
+        person.contacts.add(contact)
         person.delete()
         self.assertEqual(Person.objects.count(), 0)
-        self.assertEqual(Contact.objects.count(), 0)
+        self.assertEqual(Contact.objects.count(), 1)
