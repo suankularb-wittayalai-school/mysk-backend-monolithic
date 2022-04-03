@@ -46,7 +46,7 @@ class Person(models.Model):
     middle_name_en = models.CharField(max_length=50, blank=True, null=True)
     birthdate = models.DateField()
     citizen_id = models.CharField(max_length=13)
-    contact = models.ManyToManyField(Contact, blank=True, null=True, related_name="of")
+    contacts = models.ManyToManyField(Contact, blank=True, null=True, related_name="of")
 
     def __str__(self):
         return f"{self.prefix_en} {self.first_name_en} {self.last_name_en}"
