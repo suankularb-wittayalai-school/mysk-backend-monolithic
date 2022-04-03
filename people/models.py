@@ -1,6 +1,27 @@
 from django.db import models
 
 # Create your models here.
+class Contact(models.Model):
+    contact_type_choices = (
+        ("P", "Phone"),
+        ("E", "Email"),
+        ("F", "Facebook"),
+        ("L", "Line"),
+        ("T", "Twitter"),
+        ("I", "Instagram"),
+        ("W", "Website"),
+        ("D", "Discord"),
+        ("O", "Other"),
+    )
+
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=1, choices=contact_type_choices)
+    value = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Person(models.Model):
     prefix_en_choices = (
         ("Mr.", "Mr."),
@@ -25,4 +46,7 @@ class Person(models.Model):
     middle_name_en = models.CharField(max_length=50, blank=True, null=True)
     birthdate = models.DateField()
     citizen_id = models.CharField(max_length=13)
-    # contact = models.ManyToManyField("Contact", blank=True)
+    contact = models.ManyToManyField(Contact, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.prefix_en} {self.first_name_en} {self.last_name_en}"
