@@ -2,3 +2,5 @@
 ignore = 
     # Ignore unused import
     F401 
+    # Ignore line length
+    E501
