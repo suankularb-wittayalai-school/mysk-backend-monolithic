@@ -5,7 +5,8 @@ click==8.1.2
 colorama==0.4.4
 Django==3.2.12
 djangorestframework==3.13.1
-flake8==4.0.1
+flake8==3.9.2
+flake8-django==1.1.2
 graphene==2.1.9
 graphene-django==2.15.0
 graphql-core==2.3.2
@@ -16,8 +17,8 @@ mypy-extensions==0.4.3
 pathspec==0.9.0
 platformdirs==2.5.1
 promise==2.3
-pycodestyle==2.8.0
-pyflakes==2.4.0
+pycodestyle==2.7.0
+pyflakes==2.3.1
 python-dotenv==0.20.0
 pytz==2022.1
 Rx==1.6.1
