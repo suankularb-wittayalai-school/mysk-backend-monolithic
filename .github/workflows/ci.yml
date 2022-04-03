@@ -17,28 +17,23 @@ jobs:
         python-version: [3.7, 3.8, 3.9, 3.10]
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-          pip-flags: "--no-cache-dir"
-
-      - name: Install Requirements
-        run: pip install -r requirements.txt
-
-      - name: Run Migration
-        run: python manage.py migrate
-        env:
-          DJANGO_SECRET: "{{ secrets.SECRET_KEY }}"
-
-      - name: Run Tests
-        run: python manage.py test
-        env:
-          DJANGO_SECRET: "{{ secrets.SECRET_KEY }}"
-
-      - name: Lint Code
-        run: flake8 .
-        env:
-          DJANGO_SECRET: "{{ secrets.SECRET_KEY }}"
+    uses: actions/checkout@v2
+    name: Set up Python ${{ matrix.python-version }}
+    - uses: actions/setup-python@v2
+    - with:
+      python-version: ${{ matrix.python-version }}
+      pip-flags: "--no-cache-dir"
+    name: Install Requirements
+    - run: pip install -r requirements.txt
+    name: Run Migration
+      run: python manage.py migrate
+      env:
+        DJANGO_SECRET: "{{ secrets.SECRET_KEY }}"
+    name: Run Tests
+      run: python manage.py test
+      env:
+        DJANGO_SECRET: "{{ secrets.SECRET_KEY }}"
+    name: Run Lint
+      run: flake8 .
+      env:
+        DJANGO_SECRET: "{{ secrets.SECRET_KEY }}"
