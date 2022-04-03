@@ -50,3 +50,10 @@ class Person(models.Model):
 
     def __str__(self):
         return f"{self.prefix_en} {self.first_name_en} {self.last_name_en}"
+
+
+class Student(models.Model):
+    person = models.OneToOneField(
+        Person, on_delete=models.CASCADE, related_name="student"
+    )
+    student_id = models.CharField(max_length=5)
