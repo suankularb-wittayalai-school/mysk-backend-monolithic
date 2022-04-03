@@ -40,7 +40,7 @@ class Person(models.Model):
     prefix_th = models.CharField(max_length=10, choices=prefix_th_choices)
     first_name_th = models.CharField(max_length=50)
     last_name_th = models.CharField(max_length=50)
-    middle_name_th = models.CharField(max_length=50)
+    middle_name_th = models.CharField(max_length=50, blank=True, null=True)
     first_name_en = models.CharField(max_length=50)
     last_name_en = models.CharField(max_length=50)
     middle_name_en = models.CharField(max_length=50, blank=True, null=True)
